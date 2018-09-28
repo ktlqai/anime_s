@@ -26,7 +26,7 @@ class Site extends CI_Controller {
 			echo str_replace('/index.php', '', $_SERVER['HTTP_REFERER']);
 		}
 		else {
-			redirect('/blah');
+			redirect('/site/blah');
 		}
 	}
 
