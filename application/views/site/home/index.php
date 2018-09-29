@@ -47,6 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</head>
 
 	<body class="None">
+	<?php var_dump($datas); ?>
 		<header>
 			
 	<div class="menu">
@@ -1604,7 +1605,9 @@ color: white;">
 		};
 			var db_user_id = 195297;
 	</script>
+	<!--
 	<script type="text/javascript" src="./Anime pictures and wallpapers_files/std.js.tải xuống"></script>
+	-->
 
 
 		
