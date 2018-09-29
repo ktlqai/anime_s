@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -32,9 +32,19 @@ class Home extends CI_Controller {
 		$datas = $_SESSION;
 		$data['datas'] = $datas;
 
+		$this->load->view('site/home/index', $data);
+    }
+    
+    public function register() {
+		//$datas = $this->session->userdata();
+		//$datas = $_SESSION['datas'];
+		$datas = $_SESSION;
+		$data['datas'] = $datas;
+
 		//$this->load->view('site/home/index', $data);
 		$this->load->view('site/header', $data);
-		$this->load->view('site/home/index', $data);
+		$this->load->view('site/login/register', $data);
 		$this->load->view('site/right_sidebar_and_footer', $data);
-	}
+        
+    }
 }
