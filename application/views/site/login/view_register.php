@@ -77,7 +77,9 @@
 			"have already on picture": 'have already on picture',
 		};
 	</script>
-	<script type="text/javascript" src="./Anime wallpaper_files/std.js.tải xuống"></script>
+	<!--
+	<script type="text/javascript" src="./Anime wallpaper_files/std.js.tải xuống"></script>-->
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/std.js"></script>
 		<script type="text/javascript" src="./Anime wallpaper_files/jstz.min.js.tải xuống"></script>
 		<script type="text/javascript">
 			var tz = jstz.determine(); // Determines the time zone of the browser client
@@ -89,7 +91,7 @@
 		(function() {
 			var token = '';
 			
-			var get_captcha = function() {
+			/*var get_captcha = function() {
 				grecaptcha.ready(function() {
 					grecaptcha.execute('6LekE2wUAAAAAMLyxxd5Iz5HC1owZ6yQXxYMuNYO', {action: 'registration'})
 					.then(function(tk) {
@@ -98,7 +100,7 @@
 					});
 				});
 			};
-			get_captcha();
+			get_captcha();*/
 
 			var register = function() {
 				get_by_id("login_error").innerHTML = "";
@@ -106,6 +108,7 @@
 				get_by_id("password2_error").innerHTML = "";
 				get_by_id("email_error").innerHTML = "";
 				var request = function(req) {
+					//alert(req.responseText)
 					if (req.readyState != 4) {
 						return;
 					}
@@ -117,11 +120,11 @@
 					if (json_req["success"]) {
 						window.location = json_req["redirect"];
 					} else {
-						if (json_req["input"] === 'captcha') {
+						/*if (json_req["input"] === 'captcha') {
 							alert(json_req["errormsg"]);
 							get_by_id("registersubmit").disabled = true;
 							get_captcha();
-						} else if (json_req["input"] != null) {
+						} else */if (json_req["input"] != null) {
 							get_by_id(json_req["input"] + "_error").innerHTML = json_req["errormsg"];
 						} else {
 							alert(json_req["errormsg"]);
@@ -129,7 +132,7 @@
 					}
 				}
 				ajax_request2(
-					"/login/register",
+					"<?php echo base_url(); ?>/site/login/register",
 					{
 						"login": get_by_id("login").value,
 						"password": get_by_id("password").value,
@@ -139,6 +142,7 @@
 					},
 					request
 				);
+				//alert('abc')
 			}
 			document.addEventListener("DOMContentLoaded", function() {
 				get_by_id("registersubmit").addEventListener("click", register);

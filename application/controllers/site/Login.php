@@ -35,7 +35,7 @@ class Login extends CI_Controller {
 		$this->load->view('site/home/index', $data);
     }
     
-    public function register() {
+    public function view_register() {
 		//$datas = $this->session->userdata();
 		//$datas = $_SESSION['datas'];
 		$datas = $_SESSION;
@@ -43,8 +43,14 @@ class Login extends CI_Controller {
 
 		//$this->load->view('site/home/index', $data);
 		$this->load->view('site/header', $data);
-		$this->load->view('site/login/register', $data);
+		$this->load->view('site/login/view_register', $data);
 		$this->load->view('site/right_sidebar_and_footer', $data);
         
-    }
+	}
+	
+	public function register() {
+		$json_datas = array("input" => "login", "success" => false, "errormsg" => "Login is empty");
+
+		echo json_encode($json_datas);
+	}
 }
