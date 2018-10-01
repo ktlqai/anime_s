@@ -9,7 +9,7 @@
 		<div class="title">Register</div>
 		<table class="register_table">
 			<tbody><tr>
-				<td>Login:</td>
+				<td><?php echo lang('login'); ?>:</td>
 				<td><input id="login" type="text" name="username" value=""></td>
 				<td id="login_error" style="color:red;"></td>
 			</tr>
@@ -108,7 +108,7 @@
 				get_by_id("password2_error").innerHTML = "";
 				get_by_id("email_error").innerHTML = "";
 				var request = function(req) {
-					//alert(req.responseText)
+					alert(req.responseText)
 					if (req.readyState != 4) {
 						return;
 					}

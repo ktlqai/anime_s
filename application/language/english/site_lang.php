@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// site menus
 $lang['main'] = 'Main';
 $lang['pictures'] = 'Pictures';
 $lang['tags'] = 'Tags';
@@ -11,3 +12,6 @@ $lang['logout'] = 'Logout';
 $lang['language'] = 'Language';
 $lang['theme'] = 'Theme';
 $lang['faq'] = 'FAQ';
+
+// login form
+$lang['login'] = 'Login';
