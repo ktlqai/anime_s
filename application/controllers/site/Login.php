@@ -77,11 +77,23 @@ class Login extends CI_Controller {
 		/*$this->form_validation->set_rules('field_name', 'Field Label', 'rule1|rule2|rule3',
         	array('rule2' => 'Error Message on rule2 for this field_name')
 		);*/
-		$this->form_validation->set_rules('password', 'Password', 'required',
-				array('required' => 'You must provide a %s.')
+		$this->form_validation->set_rules('password', 'Password',
+			/*'trim|*/'required|min_length[6]',
+			array('required' => $this->lang->line('login_view_register_form_password_empty_error'),
+				'min_length' => $this->lang->line('login_view_register_form_password_min_length_error'))
 		);
-		$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('password2', 'Password Confirmation',
+			'required|min_length[6]|matches[password]',
+			array('required' => $this->lang->line('login_view_register_form_password2_empty_error'),
+				'min_length' => $this->lang->line('login_view_register_form_password2_min_length_error'),
+				'matches' => $this->lang->line('login_view_register_form_password2_matches_error'))
+		);
+		$this->form_validation->set_rules('email', 'Email',
+			'trim|required|valid_email',
+			array('required' => $this->lang->line('login_view_register_form_email_empty_error'),
+				'valid_email' => $this->lang->line('login_view_register_form_email_valid_error'),
+				/*'matches' => $this->lang->line('login_view_register_form_password2_matches_error')*/)
+		);
 
 		$json_datas = array();
 
