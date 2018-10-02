@@ -47,6 +47,12 @@ class Login extends CI_Controller {
 		$this->load->view('site/right_sidebar_and_footer', $data);
         
 	}
+
+	function check_login_existed($value) {
+		$this->load->model('user_model');
+		
+		return !$this->user_model->check_exists(array('login' => $value));
+	}
 	
 	public function register() {
 		$this->load->model('user_model');
@@ -56,9 +62,10 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('login', 'lang:login', 
-			'trim|required|min_length[4]',
-			array('required' => $this->lang->line('login') . ' must not be empty!',
-				'min_length' => $this->lang->line('login') . ' must be 4 or more characters!')
+			'trim|required|min_length[4]|callback_check_login_existed',
+			array('required' => $this->lang->line('login_view_register_form_login_empty_error'),
+				'min_length' => $this->lang->line('login_view_register_form_login_min_length_error'),
+				'check_login_existed' => $this->lang->line('login_view_register_form_login_existed_error'))
 		);
 		/*$this->form_validation->set_rules('login', 'lang:login',
 			array('login_callable', function($value) {
