@@ -79,7 +79,10 @@
 	</script>
 	<!--
 	<script type="text/javascript" src="./Anime wallpaper_files/std.js.tải xuống"></script>-->
-	<script type="text/javascript" src="<?php echo base_url(); ?>js/std.js"></script>
+	
+	<!--
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/std.js"></script>-->
+	
 		<script type="text/javascript" src="./Anime wallpaper_files/jstz.min.js.tải xuống"></script>
 		<script type="text/javascript">
 			var tz = jstz.determine(); // Determines the time zone of the browser client

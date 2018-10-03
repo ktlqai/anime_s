@@ -28,4 +28,4 @@ $lang['login_view_register_form_password2_matches_error'] = 'Password repeat mus
 
 $lang['login_view_register_form_email_empty_error'] = 'Email must not be empty!';
 $lang['login_view_register_form_email_valid_error'] = 'Email must be valid!';
-//$lang['login_view_register_form_password2_matches_error'] = 'Password repeat must match password!';
+$lang['login_view_register_form_email_existed_error'] = 'Email must be different as it was already chosen!';

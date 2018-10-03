@@ -53,6 +53,12 @@ class Login extends CI_Controller {
 		
 		return !$this->user_model->check_exists(array('login' => $value));
 	}
+
+	function check_email_existed($value) {
+		$this->load->model('user_model');
+		
+		return !$this->user_model->check_exists(array('email' => $value));
+	}
 	
 	public function register() {
 		$this->load->model('user_model');
@@ -61,7 +67,7 @@ class Login extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('login', 'lang:login', 
+		$this->form_validation->set_rules('login', 'lang:login',
 			'trim|required|min_length[4]|callback_check_login_existed',
 			array('required' => $this->lang->line('login_view_register_form_login_empty_error'),
 				'min_length' => $this->lang->line('login_view_register_form_login_min_length_error'),
@@ -89,10 +95,10 @@ class Login extends CI_Controller {
 				'matches' => $this->lang->line('login_view_register_form_password2_matches_error'))
 		);
 		$this->form_validation->set_rules('email', 'Email',
-			'trim|required|valid_email',
+			'trim|required|valid_email|callback_check_email_existed',
 			array('required' => $this->lang->line('login_view_register_form_email_empty_error'),
 				'valid_email' => $this->lang->line('login_view_register_form_email_valid_error'),
-				/*'matches' => $this->lang->line('login_view_register_form_password2_matches_error')*/)
+				'check_email_existed' => $this->lang->line('login_view_register_form_email_existed_error'))
 		);
 
 		$json_datas = array();
@@ -114,10 +120,42 @@ class Login extends CI_Controller {
 		else
 		{
 				//$this->load->view('formsuccess');
+				//$password_hashed = password_hash("rasmuslerdorf", PASSWORD_BCRYPT);
+				$password = $this->input->post('password');
+				$password_hashed = password_hash($password, PASSWORD_BCRYPT);
+				$user_data = array(
+					'login' => $this->input->post('login'),
+					'password' => $password_hashed,
+					'email' => $this->input->post('email'),
+				);
+
+				$return_insert = $this->user_model->create($user_data);
+				if ($return_insert) {
+					$json_datas = array("input" => "login", "success" => true,
+						"errormsg" => "Registration was successful!",
+						'redirect' => base_url() . 'site/login/login'
+					);
+				}
+				else {
+					$json_datas = array("input" => "login", "success" => false,
+						"errormsg" => "Database create user error! Reload register form & make registration again.");
+				}
 		}
 
 		//$json_datas = array("input" => "login", "success" => false, "errormsg" => "Login is empty");
 
 		echo json_encode($json_datas);
+	}
+
+	public function login() {
+		//$datas = $this->session->userdata();
+		//$datas = $_SESSION['datas'];
+		$datas = $_SESSION;
+		$data['datas'] = $datas;
+
+		$this->load->view('site/login/login', $data);
+		/*$this->load->view('site/header', $data);
+		$this->load->view('site/login/view_register', $data);
+		$this->load->view('site/right_sidebar_and_footer', $data);*/
 	}
 }

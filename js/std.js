@@ -1761,7 +1761,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var isPushEnabled = false;
 
-Notification.requestPermission().then(function(result) {
+Notification_del.requestPermission().then(function(result) {
 	if (!window.is_login) {
 		return;
 	}
